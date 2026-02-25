@@ -2,7 +2,11 @@ module.exports = {
   requires: { bundle: "ai" },
   daemon: true,
   run: [
+    // =========================
+    // [0] Start ComfyUI
+    // =========================
     {
+      id: "start_comfyui",
       method: "shell.run",
       params: {
         venv: "env",
@@ -15,42 +19,69 @@ module.exports = {
           "{{platform === 'win32' && gpu === 'amd' ? 'python main.py --directml' : 'python main.py'}}",
         ],
         on: [
-
-          // 🔁 Manager pidió reinicio
-          {
-            event: "/\\bRestart(ing)?\\b.*\\b(reapply|dependenc(y|ies)?)\\b/i",
-            done: true,
-          },
-
-          // 🌐 ComfyUI listo
+          // ✅ Normal startup → capture URL (group 1 is URL)
           {
             event: "/To see the GUI go to:\\s*(https?:\\/\\/[^\\s]+)/i",
             done: true,
           },
 
-          // fallback 1
+          // ✅ Fallback if wording changes (group 1 is URL)
           {
             event: "/starting server.*?(https?:\\/\\/[^\\s]+)/i",
             done: true,
           },
 
-          // fallback 2
+          // 🔁 Manager restart request → kill ComfyUI cleanly
+          // IMPORTANT: no capturing groups here
           {
-            event: "/(http:\\/\\/(?:127\\.0\\.0\\.1|localhost|\\d+\\.\\d+\\.\\d+\\.\\d+):\\d{2,5})/i",
-            done: true,
+            event: "/\\[ComfyUI-Manager\\].*Restarting to reapply dependency/i",
+            kill: true,
           },
-          
+
           { event: "/errno/i", break: false },
           { event: "/error:/i", break: false },
         ],
       },
     },
 
-    // 📄 Decisión final de vista
+    // =========================
+    // [1] Route based on *real* URL
+    // =========================
     {
+      method: "jump",
+      params: {
+        id: "{{(input.event && input.event[1] && /^https?:\\/\\//.test(input.event[1])) ? 'set_url' : 'manager_restart'}}",
+        params: {
+          url: "{{(input.event && input.event[1] && /^https?:\\/\\//.test(input.event[1])) ? input.event[1] : ''}}",
+        },
+      },
+    },
+
+    // =========================
+    // [2] Manager restart flow
+    // =========================
+    {
+      id: "manager_restart",
+      method: "log",
+      params: {
+        type: "raw",
+        data:
+          "Restart Required — ComfyUI-Manager installed new dependencies. Restarting ComfyUI once more to apply them.",
+      },
+    },
+    {
+      method: "jump",
+      params: { id: "start_comfyui" },
+    },
+
+    // =========================
+    // [3] Normal startup path
+    // =========================
+    {
+      id: "set_url",
       method: "local.set",
       params: {
-        url: "{{ (input && input.event && input.event[1] && /^https?:\\/\\//.test(input.event[1])) ? input.event[1] : 'restart_notice.html?raw=true' }}",
+        url: "{{input.url}}",
       },
     },
   ],

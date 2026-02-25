@@ -102,7 +102,7 @@ module.exports = async (kernel, info) => {
         },
         peers: [
           "https://github.com/maoper11/inteliweb-comfyui.git",
-          "https://github.com/cocktailpeanutlabs/comfyui.git",
+          "https://github.com/pinokiofactory/comfy.git",
           "https://github.com/cocktailpeanut/fluxgym.git",
           "https://github.com/cocktailpeanutlabs/automatic1111.git",
           "https://github.com/cocktailpeanutlabs/fooocus.git",
@@ -118,7 +118,7 @@ module.exports = async (kernel, info) => {
         drive: { output: "app/output" },
         peers: [
           "https://github.com/maoper11/inteliweb-comfyui.git",
-          "https://github.com/cocktailpeanutlabs/comfyui.git",
+          "https://github.com/pinokiofactory/comfy.git",
           "https://github.com/cocktailpeanut/fluxgym.git",
           "https://github.com/cocktailpeanutlabs/automatic1111.git",
           "https://github.com/cocktailpeanutlabs/fooocus.git",
