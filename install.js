@@ -100,7 +100,7 @@ module.exports = async (kernel, info) => {
 
         },
         peers: [
-          "https://github.com/maoper11/inteliweb-comfyui.git",
+          "https://github.com/Stancarol96/inteliweb-comfyui.git",
           "https://github.com/pinokiofactory/comfy.git",
           "https://github.com/cocktailpeanut/fluxgym.git",
           "https://github.com/cocktailpeanutlabs/automatic1111.git",
@@ -116,7 +116,7 @@ module.exports = async (kernel, info) => {
       params: {
         drive: { output: "app/output" },
         peers: [
-          "https://github.com/maoper11/inteliweb-comfyui.git",
+          "https://github.com/Stancarol96/inteliweb-comfyui.git",
           "https://github.com/pinokiofactory/comfy.git",
           "https://github.com/cocktailpeanut/fluxgym.git",
           "https://github.com/cocktailpeanutlabs/automatic1111.git",
