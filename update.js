@@ -43,12 +43,42 @@ module.exports = {
       path: "app/user/default/workflows/comfy_json_workflow"
     }
   }, {
+    when: "{{!exists('app/custom_nodes/ComfyUI-GGUF')}}",
+    method: "shell.run",
+    params: {
+      message: "git clone https://github.com/city96/ComfyUI-GGUF",
+      path: "app/custom_nodes"
+    }
+  }, {
+    when: "{{exists('app/custom_nodes/ComfyUI-GGUF')}}",
+    method: "shell.run",
+    params: {
+      message: "git pull",
+      path: "app/custom_nodes/ComfyUI-GGUF"
+    }
+  }, {
+    when: "{{!exists('app/custom_nodes/ComfyUI-KJNodes')}}",
+    method: "shell.run",
+    params: {
+      message: "git clone https://github.com/kijai/ComfyUI-KJNodes",
+      path: "app/custom_nodes"
+    }
+  }, {
+    when: "{{exists('app/custom_nodes/ComfyUI-KJNodes')}}",
+    method: "shell.run",
+    params: {
+      message: "git pull",
+      path: "app/custom_nodes/ComfyUI-KJNodes"
+    }
+  }, {
     method: "shell.run",
     params: {
       path: "app",
       venv: "env",
       message: [
-        "uv pip install -r requirements.txt"
+        "uv pip install -r requirements.txt",
+        "uv pip install -r custom_nodes/ComfyUI-GGUF/requirements.txt",
+        "uv pip install -r custom_nodes/ComfyUI-KJNodes/requirements.txt"
       ],
     }
   }]
