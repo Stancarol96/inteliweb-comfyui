@@ -2,7 +2,7 @@ const path = require('path')
 module.exports = {
   version: "1.1",
   title: "ComfyUI",
-  description: "One-click ComfyUI + Torch + Python installer by Inteliweb AI. https://github.com/Comfy-Org",
+  description: "One-click ComfyUI + Torch + Python installer by Inteliweb AI. https://github.com/Stancarol96/inteliweb-comfyui",
   icon: "icon.jpeg",
   menu: async (kernel, info) => {
     let installed = info.exists("app/env")
