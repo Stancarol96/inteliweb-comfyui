@@ -33,6 +33,7 @@ module.exports = {
       "wan/image720p.js",
       "ltx/install.js",
       "ltx/image2video.js",
+      "ltx/ltx23.js",
 //      "mochi-mac.json",
       "download.json"
     ]
@@ -113,6 +114,10 @@ module.exports = {
               icon: "fa-solid fa-compact-disc",
               text: "LTX 2.0 (Image to Video)",
               href: "ltx/image2video.js"
+            }, {
+              icon: "fa-solid fa-compact-disc",
+              text: "LTX 2.3 (22B)",
+              href: "ltx/ltx23.js"
             }]
           }, {
             text: "Wan Video",
