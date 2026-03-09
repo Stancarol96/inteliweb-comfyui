@@ -116,7 +116,7 @@ module.exports = {
               href: "ltx/image2video.js"
             }, {
               icon: "fa-solid fa-compact-disc",
-              text: "LTX 2.3 (22B)",
+              text: "LTX 0.9.8 (13B)",
               href: "ltx/ltx23.js"
             }]
           }, {

@@ -1,34 +1,26 @@
 module.exports = {
   run: [
-    // 1. Main checkpoint — checkpoints/
+    // Main checkpoint (fp8 dev, 13B)
     {
       method: "fs.download",
       params: {
-        uri: "https://huggingface.co/Lightricks/LTX-Video/resolve/main/ltx-2.3-22b-dev-fp8.safetensors",
+        uri: "https://huggingface.co/Lightricks/LTX-Video/resolve/main/ltxv-13b-0.9.8-dev-fp8.safetensors",
         dir: "../app/models/checkpoints"
       }
     },
-    // 2. Gemma text encoder — text_encoders/
+    // Spatial upscaler
     {
       method: "fs.download",
       params: {
-        uri: "https://huggingface.co/Lightricks/LTX-Video/resolve/main/gemma_3_12B_it_fp4_mixed.safetensors",
-        dir: "../app/models/text_encoders"
+        uri: "https://huggingface.co/Lightricks/LTX-Video/resolve/main/ltxv-spatial-upscaler-0.9.8.safetensors",
+        dir: "../app/models/upscale_models"
       }
     },
-    // 3. Distilled LoRA — loras/
+    // Temporal upscaler
     {
       method: "fs.download",
       params: {
-        uri: "https://huggingface.co/Lightricks/LTX-Video/resolve/main/ltx-2.3-22b-distilled-lora-384.safetensors",
-        dir: "../app/models/loras"
-      }
-    },
-    // 4. Spatial upscaler — upscale_models/
-    {
-      method: "fs.download",
-      params: {
-        uri: "https://huggingface.co/Lightricks/LTX-Video/resolve/main/ltx-2.3-spatial-upscaler-x2-1.0.safetensors",
+        uri: "https://huggingface.co/Lightricks/LTX-Video/resolve/main/ltxv-temporal-upscaler-0.9.8.safetensors",
         dir: "../app/models/upscale_models"
       }
     }
